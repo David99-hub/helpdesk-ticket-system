@@ -15,6 +15,11 @@
 
       <button type="submit">Login</button>
     </form>
+    <p>
+      <a href="#" @click.prevent="goToForgotPassword">
+       Forgot Password?
+      </a>
+    </p>
   </div>
 </template>
 
@@ -28,8 +33,12 @@ function handleLogin() {
   console.log('Logging in:', email.value, password.value)
 
   alert("Login successful!")
-  
+
   router.push('/dashboard')
+}
+
+function goToForgotPassword() {
+  router.push('/forgot-password')
 }
 </script>
 
