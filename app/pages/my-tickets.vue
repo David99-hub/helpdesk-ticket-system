@@ -10,26 +10,37 @@
 
     <div v-else>
       <div v-for="ticket in tickets" :key="ticket.id">
-        <h3>{{ ticket.ticketId }}</h3>
+  <h3>{{ ticket.ticketId }}</h3>
 
-         <p><strong>Title:</strong> {{ ticket.title }}</p>
+  <p><strong>Title:</strong> {{ ticket.title }}</p>
+  <p><strong>Description:</strong> {{ ticket.description }}</p>
+  <p><strong>Issue Type:</strong> {{ ticket.issueType }}</p>
+  <p><strong>Priority:</strong> {{ ticket.priority }}</p>
+  <p><strong>Status:</strong> {{ ticket.status }}</p>
+  <p><strong>Created:</strong> {{ ticket.createdAt }}</p>
 
-         <p><strong>Description:</strong> {{ ticket.description }}</p>
+  <button
+    v-if="ticket.status === 'Open'"
+    @click="resolveTicket(ticket.id)"
+  >
+    Mark as Resolved
+  </button>
 
-         <p><strong>Issue Type:</strong> {{ ticket.issueType }}</p>
-
-         <p><strong>Priority:</strong> {{ ticket.priority }}</p>
-
-         <p><strong>Status:</strong> {{ ticket.status }}</p>
-
-         <p><strong>Created:</strong> {{ ticket.createdAt }}</p>
-        <hr>
-      </div>
+  <hr>
+</div>
     </div>
   </div>
 </template>
 <script setup>
 const tickets = useTickets()
+
+function resolveTicket(ticketId) {
+  const ticket = tickets.value.find(t => t.id === ticketId)
+  if (ticket) {
+    ticket.status = 'Resolved'
+    console.log(`Ticket ${ticket.ticketId} marked as resolved.`)
+  }
+}
 </script>
 
 <style scoped>
