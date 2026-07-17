@@ -10,7 +10,9 @@
 
     <div v-else>
       <div v-for="ticket in tickets" :key="ticket.id">
-  <h3>{{ ticket.ticketId }}</h3>
+  <NuxtLink :to="`/tickets/${ticket.ticketId}`">
+    <h3>{{ ticket.ticketId }}</h3>
+  </NuxtLink>
 
   <p><strong>Title:</strong> {{ ticket.title }}</p>
   <p><strong>Description:</strong> {{ ticket.description }}</p>
