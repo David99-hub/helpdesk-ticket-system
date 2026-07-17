@@ -10,11 +10,19 @@
 
     <div v-else>
       <div v-for="ticket in tickets" :key="ticket.id">
-        <h3>{{ ticket.title }}</h3>
-        <p>{{ ticket.description }}</p>
-        <p>Issue Type: {{ ticket.issueType }}</p>
-        <p>Priority: {{ ticket.priority }}</p>
-        <p>Status: {{ ticket.status }}</p>
+        <h3>{{ ticket.ticketId }}</h3>
+
+         <p><strong>Title:</strong> {{ ticket.title }}</p>
+
+         <p><strong>Description:</strong> {{ ticket.description }}</p>
+
+         <p><strong>Issue Type:</strong> {{ ticket.issueType }}</p>
+
+         <p><strong>Priority:</strong> {{ ticket.priority }}</p>
+
+         <p><strong>Status:</strong> {{ ticket.status }}</p>
+
+         <p><strong>Created:</strong> {{ ticket.createdAt }}</p>
         <hr>
       </div>
     </div>
