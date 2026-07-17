@@ -59,13 +59,15 @@ const router = useRouter()
 
 function handleCreateTicket() {
   const newTicket = {
-    id: Date.now(),
-    title: title.value,
-    description: description.value,
-    issueType: issueType.value,
-    priority: priority.value,
-    status: 'Open'
-  }
+ id: Date.now(),
+  ticketId: 'HD-' + Math.floor(1000 + Math.random() * 9000),
+  title: title.value,
+  description: description.value,
+  issueType: issueType.value,
+  priority: priority.value,
+  status: 'Open',
+  createdAt: new Date().toLocaleString()
+}
 
   tickets.value.push(newTicket)
 
