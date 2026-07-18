@@ -2,6 +2,10 @@
   <div class="tickets-container">
     <h1>My Tickets</h1>
 
+<p class="page-subtitle">
+  View, search and manage all your submitted support tickets.
+</p>
+
     <div class="search-box">
       <input
         v-model="search"
@@ -31,16 +35,40 @@
 </div>
 
 <div v-else>
-  <div v-for="ticket in filteredTickets" :key="ticket.id">
-    <NuxtLink :to="`/tickets/${ticket.ticketId}`">
-      <h3>{{ ticket.ticketId }}</h3>
-    </NuxtLink>
+  <div
+  v-for="ticket in filteredTickets"
+  :key="ticket.id"
+  class="ticket-card"
+>
+    <div class="ticket-header">
 
+  <NuxtLink :to="`/tickets/${ticket.ticketId}`">
+    <h3>{{ ticket.ticketId }}</h3>
+  </NuxtLink>
+
+  <span
+    class="badge"
+    :class="ticket.priority.toLowerCase()"
+  >
+    {{ ticket.priority }}
+  </span>
+
+</div>
     <p><strong>Title:</strong> {{ ticket.title }}</p>
     <p><strong>Description:</strong> {{ ticket.description }}</p>
     <p><strong>Issue Type:</strong> {{ ticket.issueType }}</p>
-    <p><strong>Priority:</strong> {{ ticket.priority }}</p>
-    <p><strong>Status:</strong> {{ ticket.status }}</p>
+
+     <p>
+  <strong>Status:</strong>
+
+  <span
+    class="badge"
+    :class="ticket.status.toLowerCase()"
+  >
+    {{ ticket.status }}
+  </span>
+
+</p>
     <p><strong>Created:</strong> {{ ticket.createdAt }}</p>
 
     <button
@@ -93,16 +121,44 @@ function resolveTicket(ticketId) {
   margin: 60px auto;
   padding: 24px;
 }
+
+h1 {
+  color: white;
+  font-size: 34px;
+  margin-bottom: 5px;
+}
+
+.page-subtitle {
+  color: #cbd5e1;
+  margin-bottom: 30px;
+}
 .search-box {
   margin: 20px 0;
 }
 
 .search-box input {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 14px;
+
+  background: rgba(255,255,255,0.08);
+
+  color: white;
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  border-radius: 10px;
+
+  outline: none;
+
   box-sizing: border-box;
+}
+
+.search-box input::placeholder {
+  color: #d6dfec;
+}
+
+.search-box input:focus {
+  border-color: #3b82f6;
 }
 .filter-box {
   margin: 20px 0;
@@ -110,6 +166,80 @@ function resolveTicket(ticketId) {
 .filter-box select {
   padding: 8px;
   margin-left: 10px;
+}
+
+.ticket-card {
+  background: rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255,255,255,.12);
+
+  border-radius: 18px;
+
+  padding: 25px;
+
+  margin-bottom: 25px;
+
+  transition: .3s;
+}
+
+.ticket-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow: 0 15px 25px rgba(0,0,0,.35);
+}
+
+.badge {
+
+  display:inline-block;
+
+  padding:5px 12px;
+
+  border-radius:20px;
+
+  font-size:13px;
+
+  font-weight:bold;
+
+  color:white;
+}
+
+.low{
+  background:#043316;
+}
+
+.medium{
+  background:#eab308;
+}
+
+.high{
+  background:#f97316;
+}
+
+.critical{
+  background:#dc2626;
+}
+
+.open{
+  background:#2563eb;
+}
+
+.resolved{
+  background:#16a34a;
+}
+
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+.ticket-header h3 {
+  margin: 0;
+  color: #60a5fa;
 }
 
 </style>

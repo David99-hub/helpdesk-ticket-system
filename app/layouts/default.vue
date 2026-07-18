@@ -1,30 +1,44 @@
 <template>
   <div class="layout">
 
-    <aside class="sidebar">
-
-      <div class="logo">
+    <aside
+  class="sidebar"
+  :class="{ collapsed: isCollapsed }"
+> 
+   <button class="menu-btn" @click="toggleSidebar">
+  ☰
+   </button>
+     
+     <div class="logo">
         <span>🛠️</span>
          <h2>Helpdesk</h2>
      </div>
 
-      <NuxtLink to="/dashboard">🏠 Dashboard</NuxtLink>
+      <NuxtLink to="/dashboard">
+  🏠 <span>Dashboard</span>
+       </NuxtLink>
 
       <NuxtLink to="/create-ticket">
-        ➕ Create Ticket
+  ➕ <span>Create Ticket</span>
       </NuxtLink>
 
-      <NuxtLink to="/my-tickets">
-        🎫 My Tickets
-      </NuxtLink>
+     <NuxtLink to="/my-tickets">
+     🎫 <span>My Tickets</span>
+   </NuxtLink>
 
-      <NuxtLink to="/profile">
-        👤 Profile
+     <NuxtLink to="/profile">
+      👤 <span>Profile</span>
       </NuxtLink>
 
       <NuxtLink to="/settings">
-        ⚙️ Settings
-      </NuxtLink>
+      ⚙️ <span>Settings</span>
+     </NuxtLink>
+
+     <hr>
+
+       <button class="logout-btn" @click="logout">
+         🚪 <span>Logout</span>
+       </button>
 
     </aside>
 
@@ -34,6 +48,23 @@
 
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+
+const isCollapsed = ref(false)
+
+function toggleSidebar() {
+  isCollapsed.value = !isCollapsed.value
+}
+
+const router = useRouter()
+
+function logout() {
+  router.push("/")
+}
+
+</script>
 
 <style scoped>
 
@@ -100,5 +131,60 @@
 
   color: white;
 }
+
+.menu-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  margin-bottom: 50px;
+  text-align: left;
+}
+
+.sidebar {
+  transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 50px;
+}
+
+.sidebar.collapsed span,
+.sidebar.collapsed .logo h2 {
+  display: none;
+}
+
+.sidebar.collapsed a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+}
+
+.sidebar.collapsed .logo {
+  justify-content: center;
+}
+ .logout-btn {
+  margin-top: auto;
+
+  padding: 12px;
+
+  background: #dc2626;
+
+  color: white;
+
+  border: none;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  transition: .3s;
+}
+
+.logout-btn:hover {
+  background: #b91c1c;
+} 
 
 </style>

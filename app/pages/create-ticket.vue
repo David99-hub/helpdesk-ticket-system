@@ -2,6 +2,11 @@
   <div class="ticket-container">
     <h1>Create Ticket</h1>
 
+    <p class="page-subtitle">
+        Submit a support request and we'll help you resolve it as soon as poosible.
+        </p>>
+
+
     <form @submit.prevent="handleCreateTicket">
       <div class="form-group">
         <label>Title</label>
@@ -87,11 +92,29 @@ function handleCreateTicket() {
 
 <style scoped>
 .ticket-container {
-  max-width: 500px;
-  margin: 60px auto;
-  padding: 24px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  max-width: 650px;
+  margin: 50px auto;
+  padding: 35px;
+
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  border-radius: 18px;
+
+  box-shadow: 0 15px 30px rgba(0,0,0,0.35);
+} 
+
+h1 {
+  color: white;
+  font-size: 34px;
+  margin-bottom: 5px;
+}
+
+.page-subtitle {
+  color: #cbd5e1;
+  margin-bottom: 30px;
 }
 
 .form-group {
@@ -99,25 +122,65 @@ function handleCreateTicket() {
 }
 
 label {
+  color: #e2e8f0;
+  font-weight: bold;
+  margin-bottom: 6px;
   display: block;
-  margin-bottom: 4px;
 }
-
 input,
 textarea,
 select {
   width: 100%;
-  padding: 8px;
+  padding: 12px;
+
+  background: rgba(255,255,255,0.08);
+
+  color: white;
+
+  border: 1px solid rgba(255,255,255,0.15);
+
+  border-radius: 10px;
+
   box-sizing: border-box;
+
+  outline: none;
+
+  transition: .3s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #3b82f6;
 }
 
 button {
   width: 100%;
-  padding: 10px;
-  background: #2c3e50;
+  padding: 14px;
+
+  background: #2563eb;
+
   color: white;
+
   border: none;
-  border-radius: 4px;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
   cursor: pointer;
+
+  transition: .3s;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+option {
+  background: #08225c;
+  color: white;
 }
 </style>
