@@ -16,7 +16,7 @@
       <div class="profile-info">
         <p><strong>Name</strong><br>David</p>
 
-        <p><strong>Email</strong><br>david@example.com</p>
+        <p><strong>Email</strong><br>david</p>
 
         <p><strong>Role</strong><br>Customer</p>
       </div>

@@ -10,6 +10,9 @@
 </template>
 
 <script setup>
+ definePageMeta({
+    layout: false
+  })
 const router = useRouter()
 
 function goToLogin() {
