@@ -18,6 +18,9 @@
 </template>
 
 <script setup>
+definePageMeta({
+    layout: false
+  })
 const email = ref('')
 const message = ref('')
 
