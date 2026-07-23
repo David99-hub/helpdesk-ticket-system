@@ -63,16 +63,23 @@ const tickets = useTickets()
 const router = useRouter()
 
 function handleCreateTicket() {
+
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"))
+
+  console.log("Current User:", currentUser)
+
   const newTicket = {
- id: Date.now(),
-  ticketId: 'HD-' + Math.floor(1000 + Math.random() * 9000),
-  title: title.value,
-  description: description.value,
-  issueType: issueType.value,
-  priority: priority.value,
-  status: 'Open',
-  createdAt: new Date().toLocaleString()
-}
+    id: Date.now(),
+    ticketId: 'HD-' + Math.floor(1000 + Math.random() * 9000),
+    title: title.value,
+    description: description.value,
+    issueType: issueType.value,
+    priority: priority.value,
+    status: 'Open',
+    customerName: currentUser.name,
+    customerEmail: currentUser.email,
+    createdAt: new Date().toLocaleString()
+  }
 
   tickets.value.push(newTicket)
 
@@ -81,13 +88,15 @@ function handleCreateTicket() {
 
   submitted.value = true
 
-  // Clear the form
   title.value = ''
   description.value = ''
   issueType.value = ''
   priority.value = ''
+
   router.push('/my-tickets')
 }
+
+
 </script>
 
 <style scoped>

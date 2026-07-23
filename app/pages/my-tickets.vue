@@ -57,10 +57,9 @@
     <p><strong>Title:</strong> {{ ticket.title }}</p>
     <p><strong>Description:</strong> {{ ticket.description }}</p>
     <p><strong>Issue Type:</strong> {{ ticket.issueType }}</p>
-
-     <p>
-  <strong>Status:</strong>
-
+    <p><strong>Customer:</strong> {{ ticket.customerName }}</p>
+    <p><strong>Email:</strong> {{ ticket.customerEmail }}</p>
+   
   <span
     class="badge"
     :class="ticket.status.toLowerCase()"
@@ -68,7 +67,7 @@
     {{ ticket.status }}
   </span>
 
-</p>
+
     <p><strong>Created:</strong> {{ ticket.createdAt }}</p>
 
     <button

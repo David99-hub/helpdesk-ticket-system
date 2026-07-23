@@ -41,6 +41,17 @@ function handleSignup() {
   
   alert("Account created successfully!")
 
+  const users = JSON.parse(localStorage.getItem("users") || "[]")
+
+users.push({
+  name: name.value,
+  email: email.value,
+  password: password.value,
+  role: "Customer"
+})
+
+localStorage.setItem("users", JSON.stringify(users))
+
    router.push('/login') 
 }
 </script>

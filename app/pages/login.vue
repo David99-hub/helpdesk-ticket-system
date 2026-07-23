@@ -33,11 +33,24 @@ const password = ref('')
 const router = useRouter()
 
 function handleLogin() {
-  console.log('Logging in:', email.value, password.value)
+  console.log("Logging in:", email.value, password.value)
+
+  const users = JSON.parse(localStorage.getItem("users") || "[]")
+
+  const user = users.find(
+    u => u.email === email.value && u.password === password.value
+  )
+
+  if (!user) {
+    alert("Invalid email or password")
+    return
+  }
+
+  localStorage.setItem("currentUser", JSON.stringify(user))
 
   alert("Login successful!")
 
-  router.push('/dashboard')
+  router.push("/dashboard")
 }
 
 function goToForgotPassword() {
