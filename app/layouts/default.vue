@@ -34,6 +34,10 @@
       ⚙️ <span>Settings</span>
      </NuxtLink>
 
+     <NuxtLink to="/admin">
+      👥 <span>Customers</span>
+       </NuxtLink>
+
      <hr>
 
        <button class="logout-btn" @click="logout">
@@ -186,5 +190,10 @@ function logout() {
 .logout-btn:hover {
   background: #b91c1c;
 } 
-
+hr {
+  width: 100%;
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  margin: 10px 0;
+}
 </style>

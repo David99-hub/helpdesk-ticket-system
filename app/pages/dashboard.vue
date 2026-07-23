@@ -28,12 +28,10 @@
     <h3>High Priority</h3>
     <p>{{ highPriorityTickets }}</p>
   </div>
-</div>
-    <button @click="goToCreateTicket">Create Ticket</button>
-    <button @click="goToMyTickets">My Tickets</button>
-    <button @click="goToProfile">Profile</button>
-    <button @click="goToSettings">Settings</button>
   </div>
+  </div>
+
+
 </template>
 <script setup>
 const router = useRouter()

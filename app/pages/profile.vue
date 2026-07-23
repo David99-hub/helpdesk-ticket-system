@@ -1,195 +1,149 @@
 <template>
   <div class="profile-container">
 
-    <h1>Profile</h1>
+    <h1>My Profile</h1>
 
-    <p class="page-subtitle">
-      Manage your account information.
-    </p>
+    <div class="profile-info">
 
-    <div class="profile-card">
+      <label>Name</label>
+      <input
+        v-model="name"
+        :disabled="!isEditing"
+      />
 
-      <div class="profile-avatar">
-        👤
-      </div>
+      <label>Email</label>
+      <input
+        v-model="email"
+        :disabled="!isEditing"
+      />
 
-      <div class="profile-info">
-        <p><strong>Name</strong><br>David</p>
-
-        <p><strong>Email</strong><br>david</p>
-
-        <p><strong>Role</strong><br>Customer</p>
-      </div>
-
-      <button>Edit Profile</button>
+      <label>Role</label>
+      <input
+        v-model="role"
+        disabled
+      />
 
     </div>
+
+    <button
+      v-if="!isEditing"
+      @click="isEditing = true"
+    >
+      Edit Profile
+    </button>
+
+    <button
+      v-else
+      @click="saveProfile"
+    >
+      Save Changes
+    </button>
+
+    <p
+      v-if="message"
+      class="success"
+    >
+      {{ message }}
+    </p>
 
   </div>
 </template>
 
+<script setup>
+const name = ref("David")
+const email = ref("david@example.com")
+const role = ref("Customer")
+
+const message = ref("")
+const isEditing = ref(false)
+
+onMounted(() => {
+  const saved = localStorage.getItem("profile")
+
+  if (saved) {
+    const profile = JSON.parse(saved)
+
+    name.value = profile.name
+    email.value = profile.email
+    role.value = profile.role
+  }
+})
+
+function saveProfile() {
+  localStorage.setItem(
+    "profile",
+    JSON.stringify({
+      name: name.value,
+      email: email.value,
+      role: role.value
+    })
+  )
+
+  message.value = "✅ Profile updated successfully!"
+  isEditing.value = false
+}
+</script>
+
 <style scoped>
+
 .profile-container {
-  max-width: 700px;
-  margin: 60px auto;
-  padding: 24px;
-}
-
-h1 {
-  color: white;
-  font-size: 34px;
-  margin-bottom: 5px;
-}
-
-.page-subtitle {
-  color: #cbd5e1;
-  margin-bottom: 30px;
-}
-
-.profile-card {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
-
-  border: 1px solid rgba(255,255,255,0.12);
-
-  border-radius: 18px;
-
+  width: 500px;
+  margin: 40px auto;
   padding: 30px;
-
-  text-align: center;
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
-.profile-avatar {
-  width: 90px;
-  height: 90px;
-
-  margin: auto;
-
-  border-radius: 50%;
-
-  background: #081f50;
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  font-size: 42px;
-
-  margin-bottom: 20px;
-}
-
-.profile-info p {
+.profile-container h1 {
   color: white;
-  margin: 20px 0;
+  margin-bottom: 25px;
 }
 
-.profile-info strong {
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.profile-info label {
   color: #60a5fa;
+  font-weight: bold;
+}
+
+.profile-info input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #1e293b;
+  color: white;
+}
+
+.profile-info input:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 button {
-  margin-top: 25px;
-
-  padding: 12px 25px;
-
-  background: #08225c;
-
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: #2563eb;
   color: white;
-
   border: none;
-
   border-radius: 8px;
-
   cursor: pointer;
-
-  transition: .3s;
 }
 
 button:hover {
   background: #1d4ed8;
 }
-.profile-container {
-  max-width: 700px;
-  margin: 60px auto;
-  padding: 24px;
-}
 
-h1 {
-  color: white;
-  font-size: 34px;
-  margin-bottom: 5px;
-}
-
-.page-subtitle {
-  color: #cbd5e1;
-  margin-bottom: 30px;
-}
-
-.profile-card {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
-
-  border: 1px solid rgba(255,255,255,0.12);
-
-  border-radius: 18px;
-
-  padding: 30px;
-
-  text-align: center;
-}
-
-.profile-avatar {
-  width: 90px;
-  height: 90px;
-
-  margin: auto;
-
-  border-radius: 50%;
-
-  background: #2563eb;
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  font-size: 42px;
-
-  margin-bottom: 20px;
-}
-
-.profile-info p {
-  color: white;
-  margin: 20px 0;
-}
-
-.profile-info strong {
-  color: #60a5fa;
-}
-
-button {
-  margin-top: 25px;
-
-  padding: 12px 25px;
-
-  background: #2563eb;
-
-  color: white;
-
-  border: none;
-
-  border-radius: 8px;
-
-  cursor: pointer;
-
-  transition: .3s;
-}
-
-button:hover {
-  background: #1d4ed8;
+.success {
+  margin-top: 15px;
+  color: #22c55e;
+  font-weight: bold;
 }
 
 </style>

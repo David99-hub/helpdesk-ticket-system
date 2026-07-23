@@ -4,7 +4,7 @@
 
     <p class="page-subtitle">
         Submit a support request and we'll help you resolve it as soon as poosible.
-        </p>>
+        </p>
 
 
     <form @submit.prevent="handleCreateTicket">
